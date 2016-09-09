@@ -1,0 +1,410 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IoT Hydroponics | The Basics</title>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- CarouFredSel  -->
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<script src="js/jquery.prettyPhoto.js"></script>
+
+<!-- Video Player -->
+<link href="css/video-js.css" rel="stylesheet">
+<script src="js/video.js"></script>
+<script>
+    videojs.options.flash.swf = "js/video-js.swf";
+</script>
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet">
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+
+        new jPlayerPlaylist({
+            jPlayer: "#jquery_jplayer_1",
+            cssSelectorAncestor: "#jp_container_1"
+        }, [
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-1.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Beyoncé</span><span class='item-song'>Love on Top</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-2.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Lene Marlin</span><span class='item-song'>Unforgivable Sinner</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-3.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Toby Lightman</span><span class='item-song'>Lets go Racing Boys</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+            }
+        ], {
+            swfPath: "js",
+            supplied: "oga, mp3",
+            wmode: "window",
+            smoothPlayBar: false,
+            keyEnabled: false
+        });
+    });
+    //]]>
+</script>
+
+<!-- Calendar -->
+<script src="js/jquery-ui.multidatespicker.js"></script>
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link href="css/jslider.css" rel="stylesheet">
+
+<!-- Graph Builder -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- Visual Text Editor -->
+<script src="js/nicEdit.js"></script>
+
+<!-- Multiselect (Chosen.js) -->
+<link rel="stylesheet" href="css/chosen.css">
+<script src="js/chosen.jquery.min.js"></script>
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+ 
+<script>
+
+
+var urlParams;
+(window.onpopstate = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    urlParams = {};
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+})();
+		window.alert(urlParams["pd"]);
+var plantid= urlParams["pd"].toString();		
+var pname = "";
+
+                 var purl = "http://api.humandroid.us/api/getplant/" + plantid;
+                 $.ajax({
+					type : "GET",
+					url : purl,
+						xhrFields:{withCredentials:true},
+					success : function(data){
+									pname = data.data.plantName;
+									window.alert(pname);
+									document.getElementById("plntName").value = pname;
+									}
+									});
+
+
+									
+			
+</script>
+<script>
+function savPlant(){
+ var plantName = document.getElementById("plntName").value;
+ var ppd = document.getElementById("p_Id").value;
+ var ptemph = document.getElementById("temph").value;
+ var ptempl = document.getElementById("templ").value;
+ var phumid = document.getElementById("humid").value;
+ var plt = document.getElementById("lt").value;
+ var pphhi = document.getElementById("phhi").value;
+ var pphl = document.getElementById("phl").value;
+ var ppmh = document.getElementById("ppmh").value;
+ var ppml = document.getElementById("ppml").value;
+ var cplant = {};
+ cplant.name = plantName;
+ cplant.temph = ptemph;
+ cplant.templ = ptempl;
+ cplant.phh = pphhi;
+ cplant.phl = pphl;
+ cplant.light = plt;
+ cplant.nutrienth = ppmh;
+ cplant.nutrientl = ppml;
+ cplant.moisture = phumid;
+ cplant.PlantID = ppd;
+ window.alert("saved succesfully");
+                    $.ajax({
+								type : "POST",
+								data : JSON.stringify({plant:cplant}),
+								url : "http://api.humandroid.us/api/updateandnotifyplant",
+								xhrFields:{withCredentials:true},
+								contentType: "application/json",
+								success : function(data){
+								console.log(data);
+								}
+								});
+//window.location = "notification.html";
+            
+}
+</script>
+</head>
+
+<body >
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="userdashboard.html"><i class="menu-icon menu-icon-1"></i>My Dashboard</a></li>
+                        <li>
+                            <a href="notification.html"><i class="menu-icon menu-icon-3"></i>Notifications</a>
+                            
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-5"></i>Statistics</a>
+                            <ul>
+                                <li><a href="office-balcony-statistics.html">Office balcony </a></li>
+                                <li><a href="myrooftop-statistics.html">My Roof top </a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-2"></i>Systems</a>
+                            <ul>
+                                 <li>
+                                    <a href="systems_template.html">Office balcony</a>
+                                   
+                                </li>
+                                <li>
+                                    <a href="myrooftop.html">My Roof top</a>
+                                    
+                                </li>
+                                <li>
+                                    <a href="addsystem.html">(+) Add New System ></a>
+
+                                     <ul>
+                                        <li><a href="addsystem.html">Default Mode</a></li>
+                                        <li><a href="Advanced_system.html">Advanced Mode</a></li>
+                                    </ul>
+                                    
+                                </li>
+                            
+                               
+                                
+                            </ul>
+                        </li>
+                        <li><a href="profile.html"><i class="menu-icon menu-icon-8"></i>Profile</a></li>
+                        <li><a href="home.html"><i class="menu-icon menu-icon-4"></i>Log out</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+                </div>
+            </div>
+            <!--/ row -->
+
+
+<div class="row">
+            <!-- row -->
+            <!--  <div class="col-sm-5"> -->
+            <div class="col-sm-12">
+                    <!-- Contact form -->
+                    <div class="add-comment contact-form styled boxed green-line">
+                        <div class="add-comment-title"><h3>Write a message</h3></div>
+                        <div class="comment-form">
+                            <script>
+                                // Fire multiselect
+                                jQuery(document).ready(function() {
+                                    jQuery('#contact-name').chosen({ width: "100%" });
+                                    jQuery('#commentForm .link-reset').click(function(){
+                                        jQuery("#contact-name").trigger("chosen:updated");
+                                    });
+                                });
+
+                                // Fire Text Editor
+                                bkLib.onDomLoaded(function() {
+                                    var myNicEditor = new nicEditor({
+                                        buttonList : [
+                                            'bold',
+                                            'italic',
+                                            'underline',
+                                            'forecolor',
+                                            'left',
+                                            'center',
+                                            'right',
+                                            'justify'
+                                        ]
+                                    });
+                                    myNicEditor.panelInstance('nicedit-message');
+
+                                    jQuery('#commentForm .link-reset').click(function(){
+                                        myNicEditor.removeInstance('nicedit-message');
+                                        $('#nicedit-message').val('');
+                                        myNicEditor.panelInstance('nicedit-message');
+                                    });
+                                });
+                            </script>
+
+                            <CENTER><h2>EDIT PLANT(ADVANCED MODE)</h2></CENTER>
+
+
+                            <form action="systems_template.html" method="post" id="commentForm" onsubmit="alert('Plant added Successfully')">
+                                <div class="inner">
+                                    <div class="field_select">
+                                        <label for="system-name" class="label_title">Plant Name</label>
+                                         <input type="text" name="systemName" id="plntName" value="" readonly/>
+                                        
+                                    </div>
+                                    <div class="field_text">
+                                        <label for="subject" class="label_title">Plant ID:</label>
+                                        <input type="text" name="arduino_id" id="p_Id" value="" readonly/>
+                                    </div>
+									<script>
+									
+									document.getElementById("p_Id").value = plantid;
+									</script>
+                                   
+			
+			
+
+                                      <div class="input_styled radiolist inline">
+
+                        <label for="plant-name" class="label_title">Sensors:</label>
+
+                            <div class="rowCheckbox switch"><input name="temperature" type="checkbox" id="temperature" value="temperature" checked><label for="temperature">
+                            <h5>Temperature:</h5></label></div><br><br><br>
+                            <div>
+                                 
+                              <strong style="font-size: 12pt">Min:</strong>   <input type="text" id = "templ" placeholder="Range:" value="" style="width: 45%"></input>   
+
+                             <strong style="font-size: 12pt">Max:</strong>    <input type="text" id = "temph" placeholder="Range:" value="" style="width: 45%"></input>
+
+                             
+
+                        <br>
+                            </div><br><br><br><br>
+
+                            
+
+
+                             <div class="rowCheckbox switch"><input name="humidity" type="checkbox" id="humidity" value="humidity" checked><label for="humidity">
+                             <h5>Humidity & Light</label></div><br><br><br></h5>
+                            
+                         <div>
+                                 
+                              <strong style="font-size: 12pt">Humid:</strong>   <input type="text" placeholder="Humidity" id = "humid" value="" style="width: 45%"></input><br><br><br><br>   
+
+                             <strong style="font-size: 12pt">  &nbsp Light:</strong>    <input type="text" placeholder="Light" id = "lt" value="" style="width: 45%"></input>
+
+                             
+
+                        <br>
+                            </div><br><br><br><br>
+
+                              <div class="rowCheckbox switch"><input name="pH" type="checkbox" id="pH" value="pH" checked><label for="pH">
+                              <h5>pH</label></div><br><br><br></h5>
+
+                               <div>
+                                 
+                              <strong style="font-size: 12pt">Min:</strong>   <input type="text" id = "phl" placeholder="Range:" value="" style="width: 45%"></input>   
+
+                             <strong style="font-size: 12pt">Max:</strong>    <input type="text" id = "phhi" placeholder="Range:" value="" style="width: 45%"></input>
+
+                             
+
+                        <br>
+                            </div><br><br><br><br>
+
+                              
+                               <div class="rowCheckbox switch"><input name="ppm" type="checkbox" id="ppm" value="ppm" checked><label for="ppm">
+                               <h5>PPM</label></div><br><br><br></h5>
+
+                                <div>
+                                 
+                              <strong style="font-size: 12pt">Min:</strong>   <input type="text" id = "ppml" placeholder="Range:" value="" style="width: 45%"></input>   
+
+                             <strong style="font-size: 12pt">Max:</strong>    <input type="text" id = "ppmh" placeholder="Range:" value="" style="width: 45%"></input>
+
+                             
+
+                        <br>
+                            </div><br><br><br><br>
+                             
+                               
+
+                                                            
+
+                       
+                                    
+                                </div>
+
+                                 <div class="price-bottom clearfix">
+                                        <Center>  
+                                      <!--  <a href="myrooftop.html" class="btn btn-icon btn-icon-go btn-green" onclick="alert('Plant added successfully')">  <span>Add Plant<input type="submit" value="Add System"/></span></a>-->
+                                  <h5><br><br>
+                                            
+                                   <span class="btn btn-icon btn-icon-go btn-green"><input type="button" value="Save Plant" onClick = "savPlant()"></input></span>
+                                    <a href="myrooftop.html">| <u>Cancel</u></a> </h5>  
+                                    
+                                          </Center>
+                                   
+                                    </div>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+            
+
+
+
+                
+                   </form>
+                   </div>
+
+                
+            </div>
+            <!--/ row -->
+        </div>
+        <!--/ container -->
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IOT Hydroponics</title>
+
+
+<style type="text/css">
+    body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  color: #34495e;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6em;
+}
+
+p {
+  margin: 0;
+}
+
+.notice {
+  position: relative;
+  margin: 1em;
+  background: #F9F9F9;
+  padding: 1em 1em 1em 2em;
+  border-left: 4px solid #DDD;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+}
+
+.notice:before {
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  left: -17px;
+  background-color: #DDD;
+  color: #FFF;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  font-family: Georgia;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.info {
+  border-color: #0074D9;
+}
+
+.info:before {
+  content: "i";
+  background-color: #0074D9;
+}
+
+.success {
+  border-color: #2ECC40;
+}
+
+.success:before {
+  content: "√";
+  background-color: #2ECC40;
+}
+
+.warning {
+  border-color: #FFDC00;
+}
+
+.warning:before {
+  content: "!";
+  background-color: #FFDC00;
+}
+
+.error {
+  border-color: #FF4136;
+}
+
+.error:before {
+  content: "X";
+  background-color: #FF4136;
+}
+</style>
+    
+
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- CarouFredSel  -->
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<script src="js/jquery.prettyPhoto.js"></script>
+
+<!-- Video Player -->
+<link href="css/video-js.css" rel="stylesheet">
+<script src="js/video.js"></script>
+<script>
+    videojs.options.flash.swf = "js/video-js.swf";
+</script>
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet">
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+
+        new jPlayerPlaylist({
+            jPlayer: "#jquery_jplayer_1",
+            cssSelectorAncestor: "#jp_container_1"
+        }, [
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-1.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Beyoncé</span><span class='item-song'>Love on Top</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-2.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Lene Marlin</span><span class='item-song'>Unforgivable Sinner</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-3.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Toby Lightman</span><span class='item-song'>Lets go Racing Boys</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+            }
+        ], {
+            swfPath: "js",
+            supplied: "oga, mp3",
+            wmode: "window",
+            smoothPlayBar: false,
+            keyEnabled: false
+        });
+    });
+    //]]>
+</script>
+
+<!-- Calendar -->
+<script src="js/jquery-ui.multidatespicker.js"></script>
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link href="css/jslider.css" rel="stylesheet">
+
+<!-- Graph Builder -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- Visual Text Editor -->
+<script src="js/nicEdit.js"></script>
+
+<!-- Multiselect (Chosen.js) -->
+<link rel="stylesheet" href="css/chosen.css">
+<script src="js/chosen.jquery.min.js"></script>
+
+
+<style>
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+</style>
+
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+<script>
+$(document).ready(function () {
+	    $.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getallplants",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+								$('#allPlants').empty();
+								$('#allPlants').append('<tr><th><br>Plants</th><th>Temp.high</th><th>Temp.low</th><th>pH.high</th><th>pH.low</th><th>Moisture</th><th>Nutrient</th><th>Light</th></tr>');
+								for(var i in data.data){
+															var plname = data.data[i].plantName;
+															var plight = data.data[i].condition.light;
+															var pnutrient = data.data[i].condition.nutrient.low;
+															var pmoisture = data.data[i].condition.moisture;
+															var pPhHi = data.data[i].condition.ph.hi;
+															var pPhLo = data.data[i].condition.ph.low;
+															var pTemHi = data.data[i].condition.temp.hi;
+															var pTemLo = data.data[i].condition.temp.low;
+															var pcheck = data.data[i].parent;
+															if( pcheck === "parent"){
+															plname = plname + "[R]";
+															
+															}
+															else{
+															
+															plname = plname + "[C]";
+															}
+															$('#allPlants').append("<tr><td>" +plname+ "</td><td>" +pTemHi+ "</td><td>" +pTemLo+ "</td><td>" +pPhHi+ "</td><td>" +pPhLo+ "</td><td>" +pmoisture+ "%</td><td>" +pnutrient+ "</td><td>" +plight+ "</td></tr>");
+
+
+														}
+											}
+				});
+});				
+</script>
+<script>
+function tst(){
+
+$.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getalldevices",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+								for(var i in data.data){ 
+								
+								var lname = data.data[i].DeviceName;
+								$('#deviceList').append('<li><a href="systems_template-' + i + '.html" >' + lname + '</a></li>');
+								}
+								}
+								});
+								
+$('#deviceList').append('<li><a href="addsystem.html">(+) Add New System ></a></li>');
+}								
+
+</script>
+
+
+
+</head>
+
+
+<body onload="tst()">
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="userdashboard.html"><i class="menu-icon menu-icon-1"></i>My Dashboard</a></li>
+                        <li>
+                            <a href="notification.html"><i class="menu-icon menu-icon-3"></i>Plants</a>
+                            
+                        </li>
+                        <li>
+                            <a href="office-balcony-statistics.html"><i class="menu-icon menu-icon-5"></i>Statistics</a>
+                            
+                        </li>
+                        <li>
+                             <a href="#"><i class="menu-icon menu-icon-2"></i>Systems</a>
+                            <ul id = "deviceList">
+                                 
+                                
+                                                          
+                                
+                            </ul>
+                        </li>
+                        <li><a href="profile.html"><i class="menu-icon menu-icon-8"></i>Profile</a></li>
+                        <li><a href="home.html"><i class="menu-icon menu-icon-4"></i>Log out</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+                </div>
+            </div>
+            <!--/ row -->
+
+            <div class="row">
+
+            <div class="col-sm-12">
+
+
+
+
+            
+
+            
+                    <!-- Contact form -->
+                    <div class="add-comment contact-form styled boxed green-line">
+
+                    <br>
+                    <br>
+                        
+
+
+
+<a href="addplant-advanced.html" class="btn btn-icon btn-icon-go btn-green" style="float: right; margin-right: 30px">  <span>Add Custom Plant</span></a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+                    
+                        <div class="add-comment-title"><h3>Write a message</h3></div>
+                        <div class="comment-form" style = "padding-left:20px;padding-right:20px">
+
+
+                        <h3>
+ <table id = "allPlants">
+ 
+</table></h3>
+
+
+
+
+                    </div>
+
+              </div>  
+
+              </div>    
+
+            
+        </div>
+        <!--/ container -->
+    </div>
+</div>
+</body>
+</html>

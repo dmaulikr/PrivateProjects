@@ -1,0 +1,256 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IOT Hydroponics</title>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- CarouFredSel  -->
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<script src="js/jquery.prettyPhoto.js"></script>
+
+<!-- Video Player -->
+<link href="css/video-js.css" rel="stylesheet">
+<script src="js/video.js"></script>
+<script>
+    videojs.options.flash.swf = "js/video-js.swf";
+</script>
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet">
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+
+        new jPlayerPlaylist({
+            jPlayer: "#jquery_jplayer_1",
+            cssSelectorAncestor: "#jp_container_1"
+        }, [
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-1.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Beyoncé</span><span class='item-song'>Love on Top</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-2.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Lene Marlin</span><span class='item-song'>Unforgivable Sinner</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-3.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Toby Lightman</span><span class='item-song'>Lets go Racing Boys</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+            }
+        ], {
+            swfPath: "js",
+            supplied: "oga, mp3",
+            wmode: "window",
+            smoothPlayBar: false,
+            keyEnabled: false
+        });
+    });
+    //]]>
+</script>
+
+<!-- Calendar -->
+<script src="js/jquery-ui.multidatespicker.js"></script>
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link href="css/jslider.css" rel="stylesheet">
+
+<!-- Graph Builder -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- Visual Text Editor -->
+<script src="js/nicEdit.js"></script>
+
+<!-- Multiselect (Chosen.js) -->
+<link rel="stylesheet" href="css/chosen.css">
+<script src="js/chosen.jquery.min.js"></script>
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+</head>
+<body>
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="home.html"><i class="menu-icon menu-icon-1"></i>Home</a></li>
+                        <li>
+                            <a href="about-us.html"><i class="menu-icon menu-icon-8"></i>About us</a>
+                           
+                        </li>
+                        <li>
+                            <a href="services.html"><i class="menu-icon menu-icon-3"></i>Services</a>
+                            
+                        </li>
+                        <li>
+                            <a href="register.html"><i class="menu-icon menu-icon-4"></i>Register</a>
+                           
+                        </li>
+                        <li><a href="http://api.humandroid.us/login?redirectUri=http://local.humandroid.us/IOT_comp/userdashboard.html"><i class="menu-icon menu-icon-6"></i>Sign in</a></li>
+                        <li><a href="contact-us.html"><i class="menu-icon menu-icon-9"></i>Contact Us</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+               </div>
+               </div>
+
+
+               <!-- row -->
+            <div class="row">
+            <div class="col-sm-12">
+
+                    <!-- Image Slider -->
+                    <div id="gallery-1" class="tf-gallery boxed">
+                        <div class="gallery-images-wrap">
+                            <ul class="gallery-images">
+                                <li><a href="images/temp/hydroponic-1.png" data-rel="prettyPhoto[gal]"><img src="images/temp/hydroponic-1.png" alt="" /></a></li>
+                                <li><a href="images/temp/hydroponic-2.jpg" data-rel="prettyPhoto[gal]"><img src="images/temp/hydroponic-2.jpg" alt="" /></a></li>
+                                <li><a href="images/temp/hydroponic-3.jpg" data-rel="prettyPhoto[gal]"><img src="images/temp/hydroponic-3.jpg" alt="" /></a></li>
+                                <li><a href="images/temp/hydroponic-4.jpg" data-rel="prettyPhoto[gal]"><img src="images/temp/hydroponic-4.jpg" alt="" /></a></li>
+                                <li><a href="images/temp/hydroponic-5.jpg" data-rel="prettyPhoto[gal]"><img src="images/temp/hydroponic-5.jpg" alt="" /></a></li>
+                                <li><a href="images/temp/hydroponic-6.jpg" data-rel="prettyPhoto[gal]"><img src="images/temp/hydroponic-6.jpg" alt="" /></a></li>                             
+                            </ul>
+                            <a href="#" class="tf-gallery-btn prev">PREV</a>
+                            <a href="#" class="tf-gallery-btn next">NEXT</a>
+                        </div>
+                        <div class="gallery-thumbs-wrap">
+                            <ul class="gallery-thumbs">
+                                <li><img src="images/temp/hydroponic-1.png" alt="" /></li>
+                                <li><img src="images/temp/hydroponic-2.jpg" alt="" /></li>
+                                <li><img src="images/temp/hydroponic-3.jpg" alt="" /></li>
+                                <li><img src="images/temp/hydroponic-4.jpg" alt="" /></li>
+                                <li><img src="images/temp/hydroponic-5.jpg" alt="" /></li>
+                                <li><img src="images/temp/hydroponic-6.jpg" alt="" /></li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <script>
+                        jQuery(document).ready(function($) {
+                            var gallery = $("#gallery-1"),
+                                galleryContent = gallery.html();
+
+                            gallery.tfGallery();
+
+                            $(window).resize(function() {
+                                gallery.empty().html(galleryContent);
+                                setTimeout(function(){gallery.tfGallery()},0);
+                                $(".tf-gallery a[data-rel^='prettyPhoto']").prettyPhoto();
+                            });
+                        });
+                    </script>
+                  
+                    <!-- Image Slider -->
+                    </div>
+                </div>
+            
+
+
+             <div class="row">
+                     <div class="col-sm-12">
+
+                    <div class="widget-container widget-tags styled boxed">
+                     <div class="inner">
+                      <div class="col-sm-6">
+                      <br><br><br>
+                    <!-- Video Player -->
+                    <div class="video-player">
+                        <video id="video1" controls preload="none" poster="images/temp/post-img-3.jpg" class="video-js vjs-styled-skin">
+                            <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+                            <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+                        </video>
+                        <script>
+                            videojs("video1", {
+                                "height": "auto",
+                                "width": "auto"
+                            }).ready(function() {
+                                var myPlayer = this; // Store the video object
+                                var aspectRatio = 1 / 2; // Make up an aspect ratio
+                                function resizeVideoJS() {
+                                    // Get the parent element's actual width
+                                    var width = document.getElementById(myPlayer.id()).parentElement.offsetWidth;
+                                    // Set width to fill parent element, Set height
+                                    myPlayer.width(width).height(width * aspectRatio);
+                                }
+                                resizeVideoJS(); // Initialize the function
+                                window.onresize = resizeVideoJS; // Call the function on resize
+                            });
+                        </script>
+                    </div>
+                    </div>
+                    <!--/ Video Player -->
+                    <br>
+
+                            <h3>Hydroponics<i></i></h3>
+                            <p><b>Hydroponic Gardening is Simple and Easy:</b>
+Hydroponics is basically growing plants without soil. It is a more efficient way to provide food and water to your plants. Plants don’t use soil – they use the food and water that are in the soil. Soil’s function is to supply plants nutrients and to anchor the plants’ roots. In a hydroponic garden, you provide your plants with a complete nutrient formula and an inert growing medium to anchor your plants’ roots so they have easier access to the food and water.
+
+Because the food is dissolved in water, it goes directly to the roots. Plants grow faster and are ready for harvest sooner. You can grow more plants in the same space as you can with a soil garden, and since there’s no soil, there’s no worry about soil-borne diseases or pests – and no weeding.
+
+<b>Choosing The Right Hydroponic System:</b>
+Choosing a system is the first step in a successful hydroponic gardening experience. Consider your available space, lighting, budget, and time constraints before purchasing any equipment or settling on a unit to build yourself. Also think about what you want to grow, whether you may want to expand, and recurring costs.
+
+The simplest way to start is with a passive system. These use a wicking material to draw nutrients up to the roots, or the root tips are suspended in a stationary solution with the main portion of the rootball hanging in the air. Passive systems are affordable and easy to build yourself. They are best suited for smaller plants. Active systems are best for larger plants and gardens. An active system uses a pump and timer to flow nutrients around the plant’s roots and to provide aeration. It costs more, but is more efficient and requires less attention, since the pump and timer handle everything automatically. Once you’ve looked at passive vs. active systems, you’ll need to choose between media-based and water culture systems.
+
+Media-based systems such as ebb-and flow (flood-and-drain), top-feed (drip), or bottom-feed systems rely on a growing medium to support the plants and hold nutrient solution around their roots. Most operate on timers, alternately wetting the medium to wash out salts and replenish nutrients and then draining so the plants can draw in atmospheric oxygen. Setup is more complex, costs are higher, and media needs to be replaced occasionally. These systems need to be protected from power outages, which can leave vulnerable roots high and dry if the pump stops functioning. On the other hand, these systems are super efficient, since nutrients are recycled back into the reservoir, and use of timers means they need less attention from you.
+
+Water culture systems usually operate without media. Plants are anchored in a plank that floats on the reservoir, suspending the roots in the nutrient solution. This kind of system is simple and inexpensive to set up and is great for water-loving plants, though special care must be taken if you want to use it with large plants. You can use rockwool cubes or small amounts of gravel to anchor plants like tomatoes and cucumbers that get top heavy when they start to bear fruit. You can also use plastic flaps, foam rings, fiber cups, or plastic collars for plant support, or tie plants to a trellis.</p>
+                            </div>
+                    </div>
+            
+
+                             
+
+                    <!--/ row -->
+
+
+         
+            </div>
+            </div>
+            </div>
+            </div>
+
+</body>
+</html>

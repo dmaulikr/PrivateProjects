@@ -1,0 +1,173 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IOT Hydroponics</title>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+
+<!----------------------------------------------------------------------------------------------------------------------------- -->
+
+<script>
+function signup(){
+				  window.alert("entered");	
+                  var eml = document.getElementById("email").value;
+				  var passwd = document.getElementById("passwrd").value;
+				  var fname = document.getElementById("firstname").value;
+				  var lname = document.getElementById("lastname").value;
+				  var mobile = document.getElementById("mobile").value;
+				  var name = fname + lname;
+				  var pack = {};
+				  pack.email = eml;
+				  pack.name = name;
+				  pack.password = passwd;
+				  pack.phone = mobile;
+				  
+                    $.ajax({
+								type : "POST",
+								data : JSON.stringify(pack),
+								url : "http://api.humandroid.us/api/signup",
+								contentType: "application/json; charset=utf-8",
+								success : function(data){
+								window.alert(data);
+								}
+								
+					
+					});
+
+}
+</script>
+</head>
+<body>
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="home.html"><i class="menu-icon menu-icon-1"></i>Home</a></li>
+                        <li>
+                            <a href="about-us.html"><i class="menu-icon menu-icon-8"></i>About us</a>
+                           
+                        </li>
+                        <li>
+                            <a href="services.html"><i class="menu-icon menu-icon-3"></i>Services</a>
+                            
+                        </li>
+                        <li>
+                            <a href="register.html"><i class="menu-icon menu-icon-4"></i>Register</a>
+                           
+                        </li>
+                        <li><a href="sign-in.html"><i class="menu-icon menu-icon-6"></i>Sign in</a></li>
+                        <li><a href="contact-us.html"><i class="menu-icon menu-icon-9"></i>Contact Us</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+               </div>
+               </div>
+
+
+               <!-- row -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Contact form -->
+                    <div class="add-comment contact-form styled boxed green-line">
+                        <div class="add-comment-title"><h3>Write a message</h3></div>
+                        <div class="comment-form">
+                            
+                            <form  >
+                                <div class="inner">
+                                    
+                                        
+                                    <div class="field_text">
+                                        <label for="first-name" class="label_title">First Name:*</label>
+                                        <input type="text" name="firstname" id="firstname" value="" placeholder="Example: John" required="Please enter the Firstname" />
+                                    </div>
+                                    <div class="field_text">
+                                        <label for="last-name" class="label_title">Last Name:*</label>
+                                        <input type="text" name="lastname" id="lastname" value="" placeholder="Example: Brown" />
+                                    </div>
+                                    <div class="field_text">
+                                        <label for="email" class="label_title">E-mail ID:*</label>
+                                        <input type="text" name="email" id="email" value="" placeholder="Example: johnbrown@gmail.com" required="Please enter the e-mail id" />
+                                    </div>
+                                    <div class="field_text">
+                                        <label for="password" class="label_title">Password:*</label>
+                                        <input type="password" name="subject" id="passwrd" value="" placeholder="password" required="Please enter a password" />
+                                    </div>
+                                    <div class="field_text">
+                                        <label for="re-password" class="label_title">Re-type Password:*</label>
+                                        <input type="password" name="re-password" id="re-password" value="" placeholder="password" required="Please re-type your password" />
+                                    </div>
+									<div class="field_text">
+									<label for="Moblie" class="label_title">Mobile:*</label>
+                                        <input type="text" name="Mobile" id="mobile" value="" placeholder="Example: 1235467890" required="Please enter Mobile number" />
+                                        </div>
+                                    <div class="field_select">
+                                        <label for="security-question" class="label_title">Security Question:*</label>
+                                        <select name="security-question" id="contact-name" placeholder="Select a security Question" required="Please Select a security question">
+                                            <option value='Select a security question'>Select a security question</option>
+                                            <option value='What is the name of your pet?'>What is the name of your pet?</option>
+                                            <option value='Name of your favorite city?'>Name of your favorite city?</option>
+                                            <option value='What is your Mothers maiden name?'>What is your Mothers maiden name?</option>
+                                            <option value='Your favorite colour?'>Your favorite colour?</option>
+                                        </select>
+                                    </div>
+                                    <div class="field_text">
+                                        <label for="answer" class="label_title">Answer:*</label>
+                                        <input type="text" name="answer" id="answer" value="" placeholder="Answer" required="Please type a security answer" />
+                                    </div>
+                                    
+                                    <div class="rowSubmit clearfix">
+                                        
+                                    <center>
+
+                                 <!--  <a href="successregister.html" class="btn btn-icon btn-icon-go btn-green"><span>Register</span></a>-->
+                                   <span class="btn btn-icon btn-icon-go btn-green"><input type="button" id="send" onclick="signup()" value="Register" onClick = "signup()"/></span>
+                                   
+                                   <a href="home.html" class="btn btn-icon btn-red"> <span>Cancel</span> </a>
+                                   <a href="#" class="link-reset btn btn-icon  btn-discard" onclick="document.getElementById('commentForm').reset(); return false"><span>clear</span></a>
+                                     </center>
+                                     </div>   
+                             </form>
+                                 </div>   
+                         </div>       
+                 
+                                      
+                 </div>   
+         </div>           
+     </div>               <!--/ Contact form -->
+</div>

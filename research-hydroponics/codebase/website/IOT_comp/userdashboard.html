@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IoT Hydroponics | The Basics</title>
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #1e86b5;
+    color: white;
+}
+</style>
+
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+<script>
+
+var ajax_call = function () {
+		//window.alert("function called");
+	    $.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getalldevices",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+							$('#dplay').empty();
+								for(var i in data.data){
+								  
+								  var dname = data.data[i].DeviceName;	
+								  var plid = data.data[i].PlantID;
+								  $('#dplay').append('<h2>' + dname + ':</h2>');
+								  var tid = "<h3><table id = " + plid + "></table></h3>";
+								  var ref = "#" + plid;
+								  $('#dplay').append(tid);
+								  
+								  
+								  //$('#table_heading').text(dname);
+								  var purl = "http://api.humandroid.us/api/getlatestplantupdate/" + plid;
+								 
+								  $.ajax({
+											type : "GET",
+											url : purl,
+											xhrFields:{withCredentials:true},
+											success: function(pdata){
+											   
+												var ind = $('<tr/>');
+												ind.append('<th>PlantName</th> <th>Temp</th>	<th>PH</th> <th>PPM</th> <th>Moist</th><th>PhAct</th><th>PPMAct</th><th>Sprinkler</th>');
+												$(ref).append(ind);
+											   for	(var j in pdata.data){
+																var tr = $('<tr/>');
+																var pname = "tomato";
+																var temp = pdata.data[j].condition.temp;
+																var ph = pdata.data[j].condition.ph;
+																var ppm = pdata.data[j].condition.nutrient;
+																var moist = pdata.data[j].condition.moisture;
+																var pha = pdata.data[j].actuatorstatus.PhBalance;
+																var ppma = pdata.data[j].actuatorstatus.Nutrition;
+																var sprink = pdata.data[j].actuatorstatus.Moisturizer;
+																
+																
+																tr.append('<td>' + pname + '</td>' +'<td>' + temp + '</td>' + '<td>' + ph + '</td>' + '<td>' + ppm + '</td>' + '<td>' + moist + '</td>'+ '<td>' + pha + '</td>' + '<td>' + ppma + '</td>'+ '<td>' + sprink + '</td>');
+																
+																$(ref).append(tr);
+											   
+											   }
+											
+											},
+								   async: false
+								  });
+								  
+								  
+								}
+								
+								}
+		
+		
+		});
+        
+    };
+	
+	setInterval	(ajax_call, 30000);
+	
+
+
+
+
+
+				
+</script>
+<script>
+function dets() {
+		//window.alert("function called");
+	    $.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getalldevices",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+							$('#dplay').empty();
+								for(var i in data.data){
+								  
+								  var dname = data.data[i].DeviceName;	
+								  var plid = data.data[i].PlantID;
+								  $('#dplay').append('<h2>' + dname + ':</h2>');
+								  var tid = "<h3><table id = " + plid + "></table></h3>";
+								  var ref = "#" + plid;
+								  $('#dplay').append(tid);
+								  
+								  
+								  //$('#table_heading').text(dname);
+								  var purl = "http://api.humandroid.us/api/getlatestplantupdate/" + plid;
+								 
+								  $.ajax({
+											type : "GET",
+											url : purl,
+											xhrFields:{withCredentials:true},
+											success: function(pdata){
+											   
+												var ind = $('<tr/>');
+												ind.append('<th>PlantName</th> <th>Temp</th>	<th>PH</th> <th>PPM</th> <th>Moist</th><th>PhAct</th><th>PPMAct</th><th>Sprinkler</th>');
+												$(ref).append(ind);
+											   for	(var j in pdata.data){
+																var tr = $('<tr/>');
+																var pname = "tomato";
+																var temp = pdata.data[j].condition.temp;
+																var ph = pdata.data[j].condition.ph;
+																var ppm = pdata.data[j].condition.nutrient;
+																var moist = pdata.data[j].condition.moisture;
+																var pha = pdata.data[j].actuatorstatus.PhBalance;
+																var ppma = pdata.data[j].actuatorstatus.Nutrition;
+																var sprink = pdata.data[j].actuatorstatus.Moisturizer;
+																
+																tr.append('<td>' + pname + '</td>' +'<td>' + temp + '</td>' + '<td>' + ph + '</td>' + '<td>' + ppm + '</td>' + '<td>' + moist + '</td>'+ '<td>' + pha + '</td>' + '<td>' + ppma + '</td>'+ '<td>' + sprink + '</td>');
+																
+																$(ref).append(tr);
+																}
+											},
+								   async: false
+								  });
+								  
+								  
+								}
+								
+								}
+		
+		
+		});
+        
+    }
+</script>
+	
+<script>
+function tst(){
+
+$.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getalldevices",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+								for(var i in data.data){ 
+								
+								var lname = data.data[i].DeviceName;
+								$('#deviceList').append('<li><a href="systems_template-' + i + '.html" >' + lname + '</a></li>');
+								}
+								}
+								});
+								
+$('#deviceList').append('<li><a href="addsystem.html">(+) Add New System ></a></li>');
+}								
+
+</script>
+</head>
+
+<body onload = "tst();dets()">
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="userdashboard.html"><i class="menu-icon menu-icon-1"></i>My Dashboard</a></li>
+                        <li>
+                            <a href="notification.html"><i class="menu-icon menu-icon-3"></i>Plants</a>
+                            
+                        </li>
+                        <li>
+                            <a href="office-balcony-statistics.html"><i class="menu-icon menu-icon-5"></i>Statistics</a>
+                            
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-2"></i>Systems</a>
+                            <ul id = "deviceList">
+                                 
+                                
+                                                          
+                                
+                            </ul>
+                        </li>
+                        <li><a href="profile.html"><i class="menu-icon menu-icon-8"></i>Profile</a></li>
+                        <li><a href="home.html"><i class="menu-icon menu-icon-4"></i>Log out</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+                </div>
+            </div>
+            <!--/ row -->
+
+            <div class="row">
+            <div class="col-sm-12">
+
+
+            <div class="widget-container widget-profile boxed blue-line">
+                        
+                        <div class="col-sm-12" id = "dplay" >
+						
+                            <h4 class="profile-title"></h4>
+				<h2 id="table_heading"> </h2>			
+
+                           
+</div>
+
+
+
+
+                            <H4 class="profile-subtitle"></H4> 
+
+                            <div class="price-bottom clearfix">                                        
+                                       
+                                    </div>
+
+
+                            
+                        </div>
+                        
+                      
+                    </div>
+
+                    </div>
+
+                   
+
+
+
+                    <!-- User Menu -->
+                    
+                    <!--/ Profile -->
+

@@ -1,0 +1,164 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IOT Hydroponics</title>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+<script>
+function signup(){
+				  	
+                  var eml = document.getElementById("email").value;
+				  var passwd = document.getElementById("password").value;
+				  var pack = {};
+				  pack.email = eml;
+				  
+				  pack.password = passwd;
+				  
+				  
+                    $.ajax({
+								type : "POST",
+								data : JSON.stringify(pack),
+								url : "http://api.humandroid.us/api/login",
+								
+								contentType: "application/json; charset=utf-8",
+								success : function(data){
+								
+								window.alert("success");
+								var msg = "Hello authenticated user : " + eml ;
+								$.each(data, function(key,value){
+				 
+										if(value === msg)
+										{
+										
+										window.location.href = "userdashboard.html"
+										
+										}
+										
+									});
+								
+								
+								},
+								error : function(){
+												window.alert("Please check your email and password !!!!");
+									}
+								
+					
+					});
+
+}
+</script>
+</head>
+
+<body>
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="home.html"><i class="menu-icon menu-icon-1"></i>Home</a></li>
+                        <li>
+                            <a href="about-us.html"><i class="menu-icon menu-icon-8"></i>About us</a>
+                           
+                        </li>
+                        <li>
+                            <a href="services.html"><i class="menu-icon menu-icon-3"></i>Services</a>
+                            
+                        </li>
+                        <li>
+                            <a href="register.html"><i class="menu-icon menu-icon-4"></i>Register</a>
+                           
+                        </li>
+                        <li><a href="sign-in.html"><i class="menu-icon menu-icon-6"></i>Sign in</a></li>
+                        <li><a href="contact-us.html"><i class="menu-icon menu-icon-9"></i>Contact Us</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+               </div>
+               </div>
+
+
+               <!-- row -->
+
+             <div class="row">
+
+            <div class="col-md-offset-2 col-md-8 col-sm-5">
+                    <!-- Contact form -->
+                    <div class="add-comment contact-form styled boxed green-line">
+                        <div class="add-comment-title"><h3>Write a message</h3></div>
+                        <div class="comment-form">
+                           
+                            <form >
+                                <div class="inner">
+                                <div class="field_text">
+                                        <label for="subject" class="label_title">User Name:</label>
+                                        <input type="text" name="username" id="email" value="" placeholder="Enter your username" required="Please enter your username" />
+                                    </div>
+                                    
+                                    <div class="field_text">
+                                        <label for="subject" class="label_title">Password:</label>
+                                        <input type="password" name="password" id="password" value="" placeholder="Enter password" required="Please enter the password" />
+                                    </div>
+                                   
+                                    <div>
+                                    
+                                    
+                                    <div class="rowSubmit clearfix">
+                                    <center>
+                                   <!-- <a href="userdashboard.html" class="btn btn-icon btn-icon-login btn-green"><span>SignIn</span><!--<input type="submit" id="signin" value="Sign-in"/></a>-->         
+                                       
+                                        
+                                        <span class="btn btn-icon btn-icon-login btn-green"><input type="button" id="signin" value="Sign-in" onClick = "signup()" /></span>
+                                         <a href="home.html" class="btn btn-icon btn-red"><span>Cancel</span></a>
+                                          <br><a href="forgotpassword.html" >Forgot Password? </a>
+
+                                         
+                                         </center>
+
+                                       
+                                        
+                                       </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--/ Contact form -->
+
+                    </div>
+

@@ -1,0 +1,49 @@
+    <aside class="sidebar big-sidebar right-sidebar panel-default">
+        <ul>
+            <li>
+                <div class="blocklist">
+                    <p>
+                             <label class="control-label">From </label>
+                    <br/>
+                            <select class="combobox form-control" required="required" style="display: none;" id="Fromstations" >
+                                <option value="" selected="selected">Select a Station</option>
+                            </select>
+
+                        <p>
+                    <label class="control-label">TO </label>
+
+                    <select class="combobox form-control" required="required" style="display: none;" id="Tostations" >
+                        <option value="" selected="selected">Select a Station</option>
+                    </select>
+                    </p>
+                    <p>
+                        <a class="button button-reversed" id="findTrains">Find Trains</a>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <h4>Real Time Estimates</h4>
+                <ul class="newslist" id="rtes">
+
+
+
+                </ul>
+
+               <!--The ajax calls to both api.bart.gov and bart.humandroid.us will work in this website.
+                bart.humandroid.us - same origin-- permitted
+                api.bar.gov - different host but the Access-Control-Allow-Headers: * is set on the bart.gov hosts.
+                i.e they are ready to serve all the requests from any origin.
+                bart.humandroid.us will not do that.
+                For my convinience, I am using my server to make http calls to BART and give the needed data.
+                For Assignment, I've made one call directly to Bart for getting real-time ETDs.
+                -->
+            </li>
+            <li id="visitcount_block">
+                <h4>Visit Count </h4>
+                <p>
+                    You have visited us <span id="visitcount"></span> time(s).
+                </p>
+            </li>
+        </ul>
+    </aside>
+    <div class="clear"></div>

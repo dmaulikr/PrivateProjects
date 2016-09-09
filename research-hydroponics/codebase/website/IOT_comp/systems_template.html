@@ -1,0 +1,437 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IoT Hydroponics | The Basics</title>
+
+<style>
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: #428bca;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #428bca;
+}
+</style>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- CarouFredSel  -->
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<script src="js/jquery.prettyPhoto.js"></script>
+
+<!-- Video Player -->
+<link href="css/video-js.css" rel="stylesheet">
+<script src="js/video.js"></script>
+<script>
+    videojs.options.flash.swf = "js/video-js.swf";
+</script>
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet">
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+
+        new jPlayerPlaylist({
+            jPlayer: "#jquery_jplayer_1",
+            cssSelectorAncestor: "#jp_container_1"
+        }, [
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-1.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Beyoncé</span><span class='item-song'>Love on Top</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-2.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Lene Marlin</span><span class='item-song'>Unforgivable Sinner</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-3.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Toby Lightman</span><span class='item-song'>Lets go Racing Boys</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+            }
+        ], {
+            swfPath: "js",
+            supplied: "oga, mp3",
+            wmode: "window",
+            smoothPlayBar: false,
+            keyEnabled: false
+        });
+    });
+    //]]>
+</script>
+
+<!-- Calendar -->
+<script src="js/jquery-ui.multidatespicker.js"></script>
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link href="css/jslider.css" rel="stylesheet">
+
+<!-- Graph Builder -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- Visual Text Editor -->
+<script src="js/nicEdit.js"></script>
+
+<!-- Multiselect (Chosen.js) -->
+<link rel="stylesheet" href="css/chosen.css">
+<script src="js/chosen.jquery.min.js"></script>
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+<script>
+$(document).ready(function () {
+				$.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getalldevices",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+							$('#dplay').empty();
+								for(var i in data.data){
+								  
+								  var dname = data.data[i].DeviceName;	
+								  var plid = data.data[i].PlantID;
+</script>
+<script>
+function tst(){
+
+$.ajax({
+					type : "GET",
+					url : "http://api.humandroid.us/api/getalldevices",
+						
+					xhrFields:{withCredentials:true},
+					success : function(data){
+								for(var i in data.data){ 
+								
+								var lname = data.data[i].DeviceName;
+								$('#deviceList').append('<li><a href="systems_template.html" >' + lname + '</a></li>');
+								}
+								}
+								});
+								
+$('#deviceList').append('<li><a href="addsystem.html">(+) Add New System ></a><ul><li><a href="addsystem.html">Default Mode</a></li><li><a href="Advanced_system.html">Advanced Mode</a></li></ul></li>');
+}
+</script>
+</head>
+<body onload = "tst()">
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="userdashboard.html"><i class="menu-icon menu-icon-1"></i>My Dashboard</a></li>
+                        <li>
+                            <a href="notification.html"><i class="menu-icon menu-icon-3"></i>Plants</a>
+                            
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-5"></i>Statistics</a>
+                            <ul>
+                                <li><a href="office-balcony-statistics.html">Office balcony </a></li>
+                                <li><a href="myrooftop-statistics.html">My Roof top </a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-2"></i>Systems</a>
+                            <ul id = "deviceList">
+                                 
+                                
+                                                          
+                                
+                            </ul>
+                        </li>
+                        <li><a href="profile.html"><i class="menu-icon menu-icon-8"></i>Profile</a></li>
+                        <li><a href="home.html"><i class="menu-icon menu-icon-4"></i>Log out</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+                </div>
+            </div>
+            <!--/ row -->
+
+
+
+
+            
+
+                        
+
+                    <!-- Tabs -->
+                    <div class="tabs-framed tabs-small boxed">
+
+                        <ul class="tabs clearfix">
+                            <li class="active"><a href="#Tomato" data-toggle="tab">Tomato</a></li>
+                              
+                            
+                            <a href="userdashboard.html" class="btn btn-red" style="float: right;" onclick="myFunction()" )><span>Delete System</span></a>   
+                            <script>
+function myFunction() {
+   // var txt;
+    var r = confirm("Are you sure you want to delete the system?");
+    if (r == true) {
+        myFunction2();
+        
+    } else {
+        myFunction3();
+    }
+   // document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
+<script type="text/javascript">
+function myFunction2(){
+    alert("System deleted successfully");
+}
+</script>
+
+<script type="text/javascript">
+function myFunction3(){
+    alert("System deletion aborted");
+}
+</script>
+
+<div class="dropdown" style="float: right;">
+  <button class="dropbtn">Add Plant      <img src="images/temp/down-arrow.png" alt="" /></button>
+  <div class="dropdown-content">
+    <a href="addplant-default-OB.html">Default Mode</a>
+    <a href="addplant-advanced-OB.html">Advanced Mode</a>
+    
+  </div>
+</div>
+                   
+                     </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="Tomato">
+                                <!-- Sensor details -->
+                                <div class="price-item style4">
+                                    <div class="price-content clearfix">
+                                        <div class="price-content-left">
+                                            <div class="price-image">
+                                            
+                                            <img src="images/temp/tomato.jpg">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="price-content-right">
+                                            <div class="price-desc">
+                                           <!--<span class="price-title">Office Balcony,</span> -->
+                                           <h2 class="price-title"><a href="#">Office Balcony,</a></h2>    
+                                            </div>
+                                            <div class="price clearfix">
+                                           <span><strong><H4>Current Temperature:<input type="text" name="temperature" id="temperature" value="23" readonly></input><br><br>
+                                                                Current Humidity:<input type="text" name="humidity" id="humidity" value="24" readonly></input><br><br>
+                                                                      Current Ph:<input type="text" name="ph" id="ph" value="25" readonly></input><br><br>
+                                                                     Current PPM:<input type="text" name="ppm" id="ppm" value="26" readonly></input><br><br>
+                                                </H4>
+                                            </span></strong>
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-bottom clearfix">  
+                                    <Center>  
+                                    <!--<a href="#" class="btn"><span>Edit Preferences</span></a>   -->           
+                                    
+                                        <!--<a href="#" class="price-reserve">Preferences</a>-->
+
+                                        </Center>
+                                    </div>
+                                </div>
+                                <!--/ temperature -->
+                            </div>
+
+                            <div class="tab-pane fade" id="Lettuce">
+                                <!-- Price item -->
+                                <div class="price-item style4">
+                                    <div class="price-content clearfix">
+                                        <div class="price-content-left">
+                                            <div class="price-image">
+                                              <img src="images/temp/lettuce.jpg">
+                                            </div>
+                                        </div>
+                                        <div class="price-content-right">
+                                            <div class="price-desc">
+                                             <h2 class="price-title"><a href="#">Office Balcony,</a></h2>    
+                                            </div>
+                                            <div class="price clearfix">
+                                           <span><strong><H4>Current Temperature:<input type="text" name="temperature" id="temperature" value="25" readonly></input><br><br>
+                                                                Current Humidity:<input type="text" name="humidity" id="humidity" value="26" readonly></input><br><br>
+                                                                      Current Ph:<input type="text" name="ph" id="ph" value="27" readonly></input><br><br>
+                                                                     Current PPM:<input type="text" name="ppm" id="ppm" value="28" readonly></input><br><br>
+                                                </H4>
+                                            </span></strong>
+                                             
+                                            </div>
+                                            <div class="price clearfix">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-bottom clearfix">                                        
+                                        <Center>  
+                                    <!--<a href="#" class="btn"><span>Edit Preferences</span></a>   -->        
+                                    
+                                        <!--<a href="#" class="price-reserve">Preferences</a>-->
+
+                                        </Center>
+                                   
+                                    </div>
+                                </div>
+                                <!--/ Price item -->
+                            </div>
+
+                            <div class="tab-pane fade" id="Rose">
+                                <!-- Price item -->
+                                <div class="price-item style4">
+                                    <div class="price-content clearfix">
+                                        <div class="price-content-left">
+                                            <div class="price-image">
+                                                
+                                             <img src="images/temp/rose.jpg">   
+                                            </div>
+                                        </div>
+                                        <div class="price-content-right">
+                                            
+                                            
+                                            <div class="price-desc">
+                                             <h2 class="price-title"><a href="#">Office Balcony,</a></h2>    
+                                            </div>
+                                            <div class="price clearfix">
+                                          <span><strong><H4>Current Temperature:<input type="text" name="temperature" id="temperature" value="29" readonly></input><br><br>
+                                                                Current Humidity:<input type="text" name="humidity" id="humidity" value="30" readonly></input><br><br>
+                                                                      Current Ph:<input type="text" name="ph" id="ph" value="31" readonly></input><br><br>
+                                                                     Current PPM:<input type="text" name="ppm" id="ppm" value="32" readonly></input><br><br>
+                                                </H4>
+                                            </span></strong>
+                                               
+                                            </div>
+                                            <div class="price clearfix">
+                                                
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-bottom clearfix">
+                                        <Center>  
+                                    <!--<a href="#" class="btn"><span>Edit Preferences</span></a>   -->      
+                                    
+                                      
+                                    
+                                        <!--<a href="#" class="price-reserve">Preferences</a>-->
+
+                                        </Center>
+                                   
+                                    </div>
+                                </div>
+                                <!--/ Price item -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/ Tabs -->
+                </div>
+
+               
+
+                   
+
+           
+                   
+               
+
+                   
+
+              
+
+                </div>
+            </div>
+            <!--/ row -->
+        </div>
+        <!--/ container -->
+    </div>
+</div>
+</body>
+</html>

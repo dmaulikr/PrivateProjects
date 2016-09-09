@@ -1,0 +1,200 @@
+<meta charset="UTF-8">
+<title>BART Mirror</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/combobox.css" type="text/css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/js/date.js"></script>
+<script type="text/javascript" src="/static/js/custom.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/abdmob/x2js/master/xml2json.js"></script>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+<script>
+    var directionsDisplay;
+    var directionsService;
+    var map;
+    var stations;
+    function initMap(){
+        directionsService = new google.maps.DirectionsService();
+        map = new google.maps.Map(document.getElementById('map'), {zoom: 9,center: {lat:37.610268, lng:-122.101907}});
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsDisplay.setMap(map);
+
+    }
+	$(document).ready(function () {
+        if(localStorage.getItem('visitcount')){
+            var count = parseInt(localStorage.getItem('visitcount'))+1;
+            localStorage.setItem('visitcount',count);
+            $('#visitcount').text(count);
+            $('#useralert').text("Welcome back to BART Mirror");
+        }
+        else {
+            localStorage.setItem('visitcount',1);
+            $('#visitcount').text("1");
+            $('#useralert').text("Welcome to BART Mirror");
+        }
+        var fstan=$('#Fromstations');
+        var tstan=$('#Tostations');
+        var globalTime=30;
+        var timer;
+        function setTimer(){
+            timer = setInterval(function() {
+                updateTrainList();
+            }, globalTime*1000);
+        };
+      setTimer();
+        var Leavestimer;
+        var updateTrainList=function(){
+            var from= fstan.val();
+            var to=tstan.val();
+            if(from.toString().length>0&&to.toString().length>0){
+
+                $.ajax({url: "/trips?from="+from+"&to="+to, success: function(result){
+                    Leavestimer=null;
+                    $('#trips').empty();
+                    $('#leavesin').text('');
+                    $('#leavesmsg').text('');
+
+                    var trips=result.trips.trips;
+                    if(!trips) return;
+                    updateMap(stations[fstan.prop('selectedIndex')-1],stations[tstan.prop('selectedIndex')-1]);
+                    var meta=result.trips.meta.value;
+
+                    var metaDate= new Date(trips[0].origTimeDate + trips[0].origTimeMin);//Date.parse(trips[0].origTimeMin); all of a sudden this stopped working
+
+                    if(((metaDate.getTime()- (new Date()).getTime())/1000)>0) {
+                        var sec = Math.round(Math.abs((metaDate.getTime() - (new Date()).getTime()) / 1000));
+                        Leavestimer = setInterval(function () {
+                            $('#leavesin').text(Math.floor(sec/60) +' Min '+ sec%60 +' sec');
+                            if (sec <= 0) {
+                                $('#leavesmsg').fadeOut('slow');
+                                clearInterval(Leavestimer);
+                            }
+                            sec--;
+                        }, 1000);
+                        $('<p>Time Now : ' + meta + '. <span id="leavesmsg"> Next Train Leaves in : <span id="leavesin"></span></span></p>').appendTo($('#trips'));
+                    }
+                    else{
+                        $('<p>Time Now : ' + meta + '.</p>').appendTo($('#trips'));
+                    }
+                    for(var i in trips){
+                        var tripDetail="";
+                        if(trips[i].leg.length>1){
+                            var legs=trips[i].leg;
+                            for(var j in legs){
+                                if(j==0) {
+                                    tripDetail+='<td><span>' + legs[j].origin + '</span></br>';
+                                    tripDetail+='<strong>'+legs[j].origTimeMin+'</strong></td>';
+                                }
+                                else if(j==legs.length-1) {
+                                    tripDetail+='<td><span>' + legs[j-1].destination +'-[T]- '+ legs[j].origin +  '</span></br>';
+                                    tripDetail+='<strong>'+legs[j-1].destTimeMin+'-'+legs[j].origTimeMin+'</strong></td>';
+                                    tripDetail+='<td><span>' + legs[j].destination + '</span></br>';
+                                    tripDetail+='<strong>'+legs[j].destTimeMin+'</strong></td>';
+                                }
+                                else {
+                                    tripDetail+='<td><span>' + legs[j-1].destination +'-[T] - '+ legs[j].origin +  '</span></br>';
+                                    tripDetail+='<strong>'+legs[j-1].destTimeMin+'-'+legs[j].origTimeMin+'</strong></td>';
+                                    tripDetail+='<td><span>' + legs[j].origin + '--' + legs[j].destination + '</span></br>';
+                                    tripDetail+='<strong>'+legs[j].origTimeMin + '--'+legs[j].destTimeMin+'</strong></td>';
+                                }
+
+
+                            }
+                        }
+                        else if(trips[i].leg){
+                            tripDetail+='<td><span>' + trips[i].leg.origin + '</span></br>';
+                            tripDetail+='<strong>'+trips[i].leg.origTimeMin+'</strong></td>';
+                            tripDetail+='<td><span>' + trips[i].leg.destination + '</span></br>';
+                            tripDetail+='<strong>'+trips[i].leg.destTimeMin+'</strong></td>';
+                        }
+
+                        $('<div class = "panel panel-default"><div class = "panel-body"> <table class="table table-striped">'
+                            +'<thead><tr><th>Start at :'+trips[i].origTimeMin+'</th><th>Fare : $'+trips[i].fare+' </th><th> Reach at :'+trips[i].destTimeMin+'</th></tr></thead></table>'
+                                +'<table class="table"><thead>'+tripDetail
+                                +'</thead></table></div></div></br>').appendTo($('#trips'));
+                    }
+
+                }});
+            }
+
+            if(from.toString().length>0){
+                $.ajax({url:"http://api.bart.gov/api/etd.aspx?cmd=etd&orig="+from.toString()+"&key=MW9S-E7SL-26DU-VV8V",success: function (result) {
+                    var x2js = new X2JS();
+
+                    var json=x2js.xml2json(result);
+                    if(json.root.station.etd.length==0)
+                    return;
+                    var rtes="";
+                    rtes+='<table class="table table striped">'+'<caption>Trains From '+json.root.station.name+'</caption><thead><tr><th>Destination</th><th>Minute(s)</th><th>Platform</th></tr></thead>'
+                    rtes+='<tbody style="font-size: small">'
+                    var etds=json.root.station.etd;
+                    for(var i in etds){
+                        rtes+='<tr><td>'+etds[i].destination+'</td>';
+                        var estimates=[].concat(etds[i].estimate);
+                        console.log(estimates[0]);
+                        rtes+='<td>'+estimates[0].minutes+'</td><td>'+estimates[0].platform+'</td></tr>';
+                    }
+                    rtes+='</tbody></table>';
+                    $('#rtes').empty();
+                    $(rtes).appendTo('#rtes');
+
+                   /*
+                    $.each($(result).find('etd'),function(index,value){
+                        console.log($(value).find('destination').text());
+                        $.each($(value).find('estimate'),function(index,value){
+                            console.log($(value).find('minutes').text());
+                        });
+                    });*/
+
+                },error:function(error){
+                    console.log(error);
+                }});
+            }
+
+
+        }
+
+        $.ajax({url: "/stations", success: function(result){
+            stations=result.stations;
+            for(var  i in result.stations){
+                $('<option value="'+result.stations[i].abbr.value+'" lat="'+result.stations[i].gtfs_latitude.value+'" lng="'+result.stations[i].gtfs_longitude.value+'" >'+result.stations[i].name.value+'</option>').appendTo(fstan);
+                $('<option value="'+result.stations[i].abbr.value+'" lat="'+result.stations[i].gtfs_latitude.value+'" lng="'+result.stations[i].gtfs_longitude.value+'" >'+result.stations[i].name.value+'</option>').appendTo(tstan);
+            }
+            $('.combobox').combobox();
+
+        }});
+
+        $('#findTrains').click(function () {
+           updateTrainList();
+        });
+
+        function updateMap(from,to){
+
+            var start=new google.maps.LatLng(parseFloat(from.gtfs_latitude.value),parseFloat(from.gtfs_longitude.value));
+            var end=new google.maps.LatLng(parseFloat(to.gtfs_latitude.value),parseFloat(to.gtfs_longitude.value));
+            var request = {
+                origin:start,
+                destination:end,
+                travelMode: google.maps.TravelMode.TRANSIT,
+                transitOptions: {
+                    departureTime: new Date(),
+                    modes: [google.maps.TransitMode.RAIL]
+                },
+                unitSystem: google.maps.UnitSystem.IMPERIAL
+            };
+            directionsService.route(request, function(result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                }
+            });
+
+        }
+
+	});
+
+
+
+</script>

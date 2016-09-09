@@ -1,0 +1,958 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IoT Hydroponics | The Basics</title>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- CarouFredSel  -->
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<script src="js/jquery.prettyPhoto.js"></script>
+
+<!-- Video Player -->
+<link href="css/video-js.css" rel="stylesheet">
+<script src="js/video.js"></script>
+<script>
+    videojs.options.flash.swf = "js/video-js.swf";
+</script>
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet">
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function(){
+
+        new jPlayerPlaylist({
+            jPlayer: "#jquery_jplayer_1",
+            cssSelectorAncestor: "#jp_container_1"
+        }, [
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-1.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Beyoncé</span><span class='item-song'>Love on Top</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-05-Your_face.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-05-Your_face.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-2.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Lene Marlin</span><span class='item-song'>Unforgivable Sinner</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/TSP-07-Cybersonnet.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/TSP-07-Cybersonnet.ogg"
+            },
+            {
+                title:"<div class='item-image'><img src='images/temp/music-player-3.jpg' alt='' /></div><div class='item-title'><span class='item-artist'>Toby Lightman</span><span class='item-song'>Lets go Racing Boys</span></div>",
+                mp3:"http://www.jplayer.org/audio/mp3/Miaow-07-Bubble.mp3",
+                oga:"http://www.jplayer.org/audio/ogg/Miaow-07-Bubble.ogg"
+            }
+        ], {
+            swfPath: "js",
+            supplied: "oga, mp3",
+            wmode: "window",
+            smoothPlayBar: false,
+            keyEnabled: false
+        });
+    });
+    //]]>
+</script>
+
+<!-- Calendar -->
+<script src="js/jquery-ui.multidatespicker.js"></script>
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link href="css/jslider.css" rel="stylesheet">
+
+<!-- Graph Builder -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- Visual Text Editor -->
+<script src="js/nicEdit.js"></script>
+
+<!-- Multiselect (Chosen.js) -->
+<link rel="stylesheet" href="css/chosen.css">
+<script src="js/chosen.jquery.min.js"></script>
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Website Menu -->
+                    <ul class="menu boxed clearfix">
+                        <li><a href="userdashboard.html"><i class="menu-icon menu-icon-1"></i>My Dashboard</a></li>
+                        <li>
+                            <a href="notification.html"><i class="menu-icon menu-icon-3"></i>Plants</a>
+                            
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-5"></i>Statistics</a>
+                            <ul>
+                                <li><a href="office-balcony-statistics.html">Office balcony </a></li>
+                                <li><a href="myrooftop-statistics.html">My Roof top </a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="menu-icon menu-icon-2"></i>Systems</a>
+                            <ul>
+                                 <li>
+                                    <a href="systems_template.html">Office balcony</a>
+                                   
+                                </li>
+                                <li>
+                                    <a href="myrooftop.html">My Roof top</a>
+                                    
+                                </li>
+                                <li>
+                                    <a href="addsystem.html">(+) Add New System ></a>
+
+                                     <ul>
+                                        <li><a href="addsystem.html">Default Mode</a></li>
+                                        <li><a href="Advanced_system.html">Advanced Mode</a></li>
+                                    </ul>
+                                    
+                                </li>
+                                                         
+                                
+                            </ul>
+                        </li>
+                        <li><a href="profile.html"><i class="menu-icon menu-icon-8"></i>Profile</a></li>
+                        <li><a href="home.html"><i class="menu-icon menu-icon-4"></i>Log out</a></li>
+                    </ul>
+                    <!--/ Website Menu -->
+                </div>
+            </div>
+            <!--/ row -->
+
+
+
+
+             <div class="col-sm-6">
+                    <!-- Statistics -->
+                    <div class="widget-container widget-stats boxed green-line">
+                        <div class="widget-title">
+                            <a href="#" class="link-refresh" id="link-refresh-1"><span class="glyphicon glyphicon-refresh"></span></a>
+                            <h3>Tomato</h3>
+
+                        </div>
+                        <div class="stats-content clearfix">
+                            <div class="stats-content-right">
+                                <div class="stats-select">
+                                    <strong><span>Temperature</span></strong>
+                                    <ul>
+                                        <li><span>Humidity</span></li>
+                                        <li><span>pH</span></li>
+                                        <li><span>Temperature</span></li>
+                                        <li><span>PPM</span></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Statistics Tab 1 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy down"><span>14%</span></div>
+                                    <div id="graph-1" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'Humidity content'],
+                                                ['SUN',  600],
+                                                ['MON',  440],
+                                                ['TUE',  260],
+                                                ['WED',  480],
+                                                ['THU',  640],
+                                                ['FRI',  500],
+                                                ['SAT',  620]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-1'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics Tab 1 -->
+
+                                <!-- Statistics Tab 2 -->
+                                <div class="stats-tab active">
+                                    <div class="occupancy up"><span>45%</span></div>
+                                    <div id="graph-2" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'pH value'],
+                                                ['SUN',  4.8],
+                                                ['MON',  5.00],
+                                                ['TUE',  5.50],
+                                                ['WED',  2.60],
+                                                ['THU',  6.20],
+                                                ['FRI',  4.40],
+                                                ['SAT',  6.40]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-2'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics Tab 2 -->
+
+                                <!-- Statistics Tab 3 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy up"><span>26%</span></div>
+                                    <div id="graph-3" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'temperature'],
+                                                ['SUN',  260],
+                                                ['MON',  360],
+                                                ['TUE',  540],
+                                                ['WED',  650],
+                                                ['THU',  560],
+                                                ['FRI',  580],
+                                                ['SAT',  600]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-3'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics Tab 3 -->
+                                <!-- Statistics Tab 4 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy up"><span>96%</span></div>
+                                    <div id="graph-4" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'PPM'],
+                                                ['SUN',  260],
+                                                ['MON',  360],
+                                                ['TUE',  540],
+                                                ['WED',  650],
+                                                ['THU',  560],
+                                                ['FRI',  580],
+                                                ['SAT',  600]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-4'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics Tab 4 -->
+                            </div>
+
+                            <div class="stats-content-left">
+                                <div class="inner">
+                                    <h6>Status:</h6>
+
+                                    <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Progress</span>
+                                            <span class="mark right">55%</span>
+                                        </div>
+                                         <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Yield</span>
+                                            <span class="mark right">40%</span>
+                                        </div>
+                                        <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
+                                        </div>
+                                    </div>
+                                   <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Power Consumption</span>
+                                            <span class="mark right">35%</span>
+                                        </div>
+                                        <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-icon btn-icon-right btn-icon-go"><span>View other stats</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Statistics -->
+                    </div>
+                     <div class="col-sm-6">
+                    <!-- Statistics 2 -->
+                    <div class="widget-container widget-stats boxed green-line">
+                        <div class="widget-title">
+                            <a href="#" class="link-refresh" id="link-refresh-1"><span class="glyphicon glyphicon-refresh"></span></a>
+                            <h3>Lettuce</h3>
+
+                        </div>
+                        <div class="stats-content clearfix">
+                            <div class="stats-content-right">
+                                <div class="stats-select">
+                                    <strong><span>Temperature</span></strong>
+                                    <ul>
+                                        <li><span>Humidity</span></li>
+                                        <li><span>pH</span></li>
+                                        <li><span>Temperature</span></li>
+                                        <li><span>PPM</span></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Statistics 2 Tab 1 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy down"><span>14%</span></div>
+                                    <div id="graph-2-1" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'Humidity content'],
+                                                ['SUN',  600],
+                                                ['MON',  440],
+                                                ['TUE',  260],
+                                                ['WED',  480],
+                                                ['THU',  640],
+                                                ['FRI',  500],
+                                                ['SAT',  620]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-2-1'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 2 Tab 1 -->
+
+                                <!-- Statistics 2 Tab 2 -->
+                                <div class="stats-tab active">
+                                    <div class="occupancy up"><span>45%</span></div>
+                                    <div id="graph-2-2" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'pH value'],
+                                                ['SUN',  4.8],
+                                                ['MON',  5.00],
+                                                ['TUE',  5.50],
+                                                ['WED',  2.60],
+                                                ['THU',  6.20],
+                                                ['FRI',  4.40],
+                                                ['SAT',  6.40]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-2-2'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 2 Tab 2 -->
+
+                                <!-- Statistics 2 Tab 3 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy up"><span>26%</span></div>
+                                    <div id="graph-2-3" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'temperature'],
+                                                ['SUN',  260],
+                                                ['MON',  360],
+                                                ['TUE',  540],
+                                                ['WED',  650],
+                                                ['THU',  560],
+                                                ['FRI',  580],
+                                                ['SAT',  600]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-2-3'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 2 Tab 3 -->
+                                <!-- Statistics 2 Tab 4 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy up"><span>96%</span></div>
+                                    <div id="graph-2-4" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'PPM'],
+                                                ['SUN',  260],
+                                                ['MON',  360],
+                                                ['TUE',  540],
+                                                ['WED',  650],
+                                                ['THU',  560],
+                                                ['FRI',  580],
+                                                ['SAT',  600]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-2-4'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 2 Tab 4 -->
+                            </div>
+
+                            <div class="stats-content-left">
+                                <div class="inner">
+                                    <h6>Status:</h6>
+
+                                    <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Progress</span>
+                                            <span class="mark right">55%</span>
+                                        </div>
+                                         <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Yield</span>
+                                            <span class="mark right">40%</span>
+                                        </div>
+                                        <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
+                                        </div>
+                                    </div>
+                                   <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Power Consumption</span>
+                                            <span class="mark right">35%</span>
+                                        </div>
+                                        <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-icon btn-icon-right btn-icon-go"><span>View other stats</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--/ Statistics 2 -->
+                     <div class="col-sm-6">
+                    <!-- Statistics 3 -->
+                    <div class="widget-container widget-stats boxed green-line">
+                        <div class="widget-title">
+                            <a href="#" class="link-refresh" id="link-refresh-1"><span class="glyphicon glyphicon-refresh"></span></a>
+                            <h3>Rose</h3>
+
+                        </div>
+                        <div class="stats-content clearfix">
+                            <div class="stats-content-right">
+                                <div class="stats-select">
+                                    <strong><span>Temperature</span></strong>
+                                    <ul>
+                                        <li><span>Humidity</span></li>
+                                        <li><span>pH</span></li>
+                                        <li><span>Temperature</span></li>
+                                        <li><span>PPM</span></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Statistics 3 Tab 1 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy down"><span>14%</span></div>
+                                    <div id="graph-3-1" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'Humidity content'],
+                                                ['SUN',  600],
+                                                ['MON',  440],
+                                                ['TUE',  260],
+                                                ['WED',  480],
+                                                ['THU',  640],
+                                                ['FRI',  500],
+                                                ['SAT',  620]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-3-1'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 3 Tab 1 -->
+
+                                <!-- Statistics 3 Tab 2 -->
+                                <div class="stats-tab active">
+                                    <div class="occupancy up"><span>45%</span></div>
+                                    <div id="graph-3-2" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'pH value'],
+                                                ['SUN',  4.8],
+                                                ['MON',  5.00],
+                                                ['TUE',  5.50],
+                                                ['WED',  2.60],
+                                                ['THU',  6.20],
+                                                ['FRI',  4.40],
+                                                ['SAT',  6.40]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-3-2'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 3 Tab 2 -->
+
+                                <!-- Statistics 3 Tab 3 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy up"><span>26%</span></div>
+                                    <div id="graph-3-3" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'temperature'],
+                                                ['SUN',  260],
+                                                ['MON',  360],
+                                                ['TUE',  540],
+                                                ['WED',  650],
+                                                ['THU',  560],
+                                                ['FRI',  580],
+                                                ['SAT',  600]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-3-3'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 3 Tab 3 -->
+                                <!-- Statistics 3 Tab 4 -->
+                                <div class="stats-tab">
+                                    <div class="occupancy up"><span>96%</span></div>
+                                    <div id="graph-3-4" class="graph"></div>
+                                    <script type="text/javascript">
+                                        google.load("visualization", "1", {packages:["corechart"]});
+                                        google.setOnLoadCallback(drawChart);
+                                        function drawChart() {
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Day', 'PPM'],
+                                                ['SUN',  260],
+                                                ['MON',  360],
+                                                ['TUE',  540],
+                                                ['WED',  650],
+                                                ['THU',  560],
+                                                ['FRI',  580],
+                                                ['SAT',  600]
+                                            ]);
+                                            var options = {
+                                                curveType: 'function',
+                                                chartArea:{left:0, top:10, width:"100%"},
+                                                hAxis: {textStyle: {color: '#474748', fontSize: 10, bold: true}},
+                                                vAxis: {gridlines: {color: '#fff', count: 0}, baselineColor: '#fff'},
+                                                tooltip: {isHtml: true},
+                                                series: [{
+                                                    color: '#3797d3',
+                                                    visibleInLegend: false,
+                                                    pointSize: 5,
+                                                    lineWidth: 2,
+                                                    areaOpacity: 0
+                                                }]
+                                            };
+
+                                            var chart = new google.visualization.LineChart(document.getElementById('graph-3-4'));
+                                            chart.draw(data, options);
+
+                                            $(window).resize(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                            $('.stats-select li').click(function() {
+                                                chart.clearChart();
+                                                chart.draw(data, options);
+                                            });
+                                        }
+                                    </script>
+                                </div>
+                                <!--/ Statistics 3 Tab 4 -->
+                            </div>
+
+                            <div class="stats-content-left">
+                                <div class="inner">
+                                    <h6>Status:</h6>
+
+                                    <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Progress</span>
+                                            <span class="mark right">55%</span>
+                                        </div>
+                                         <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Yield</span>
+                                            <span class="mark right">40%</span>
+                                        </div>
+                                        <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
+                                        </div>
+                                    </div>
+                                   <div class="progressBar">
+                                        <div class="progress-text clearfix">
+                                            <span class="mark left">Power Consumption</span>
+                                            <span class="mark right">35%</span>
+                                        </div>
+                                        <div class="progress style2">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-icon btn-icon-right btn-icon-go"><span>View other stats</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Statistics 3 -->
+                    </div> 
+                    </div>
+
+
+
+
+                   
+                        
+
+                       
+              
+
+                    
+
+   
+
+                    
+
+                    
+                
+            </div>
+            <!--/ row -->
+        </div>
+        <!--/ container -->
+    </div>
+</div>
+</body>
+</html>
